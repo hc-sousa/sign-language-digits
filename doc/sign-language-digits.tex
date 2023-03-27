@@ -43,9 +43,37 @@ In recent years, there has been growing interest in using machine learning to de
 In this paper, we present a novel approach to digit recognition from sign language images using machine learning. We explore several different models, including neural networks, support vector machines, and decision trees, and compare their performance on a dataset of sign language images. We also investigate the impact of some preprocessing techniques.
 
 \section{State of the art}
+Over the past few years, there have been several studies and projects focused on recognition from sign language images using machine learning techniques. Many of these approaches have utilized deep learning methods such as convolutional neural networks (CNNs), which have been shown to be effective in image recognition tasks.
+
+\textcolor{red}{TODO: Add some references to the state of the art}
+\section{Dataset Analysis}
+For the development of this work, we used a dataset provided by Kaggle that contains 2062 images of sign language digits. The dataset is well balanced, with a minimum of 204 examples for a label and a maximum of 208, ensuring that every label has a similar number of examples (Figure \ref{fig:dataset-balanced}). The dataset includes data for the digits 0 to 9, resulting in 10 labels in total as we can see on the figure \ref{fig:dataset-examples}. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{assets/dataset-labels.png}
+    \caption{Dataset balanced distribution}
+    \label{fig:dataset-balanced}
+\end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{assets/sign-language-digits.png}
+    \caption{Dataset label examples}
+    \label{fig:dataset-examples}
+\end{figure}
+
+The images are provided in a \textit{.npy} format, but we found it easier to work with the raw images to manipulate them and apply preprocessing techniques to improve the model's performance. The dataset's size and balanced distribution make it an ideal choice for training and evaluating machine learning models for digit recognition from sign language images.
 
 \section{Dataset Preprocessing}
-\section{Dataset Analysis}
+- Original image size == 64x64
+- Convert to grayscale
+- Augment the dataset with rotations, gaussian noise and gamma contrast
+- Split training and test data
+- Resize images to 50x50
+- Convert image to grayscale
+- Flatten image
 
 \section{Models}
 
