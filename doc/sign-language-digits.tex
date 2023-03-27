@@ -67,14 +67,23 @@ For the development of this work, we used a dataset provided by Kaggle that cont
 The images are provided in a \textit{.npy} format, but we found it easier to work with the raw images to manipulate them and apply preprocessing techniques to improve the model's performance. The dataset's size and balanced distribution make it an ideal choice for training and evaluating machine learning models for digit recognition from sign language images.
 
 \section{Dataset Preprocessing}
-- Original image size == 64x64
-- Convert to grayscale
-- Augment the dataset with rotations, gaussian noise and gamma contrast
-- Split training and test data
-- Resize images to 50x50
-- Convert image to grayscale
-- Flatten image
 
+\subsection{Image Augmentation}
+The first thing we did to the images was to augment them in order to create more data for training. 
+We used the \textit{imgaug.augmenters} to perform the augmentation. 
+The following changes were made to the images:
+\begin{itemize}
+    \item \textit{\textbf{Rotate}} - Rotate the image by a random angle between -20 and 20 degrees.
+    \item \textit{\textbf{Gaussian noise}} - Add gaussian noise with standard deviation of 0 to 0.05*255
+    \item \textit{\textbf{Gamma contrast}} - Change the contrast of the image by a random factor between 0.5 and 1.5.
+\end{itemize}
+For every image in the dataset, we created 5 new images with the above changes. Due to the small size of the dataset, we decided to perform the augmentation offline, before splitting the dataset into training and test data.
+
+\subsection{Image Preprocessing}
+We also resized the images to 50x50 pixels (down from the original size of 64x64), as we found that this size was sufficient for the models to achieve good results. Then, we converted the images to grayscale and flattened them, as we found that this improved the performance of the models.
+
+Finally, we split the dataset into training and test data. We used a 80/20 split, with 80\% of the data being used for training and 20\% for testing.
+Resulting in 9897 total images for the training data and 2475 for the test data.
 \section{Models}
 
 \section{Conclusion}
