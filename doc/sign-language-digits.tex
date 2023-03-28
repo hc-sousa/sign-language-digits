@@ -7,6 +7,7 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{listings}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -94,6 +95,7 @@ First, we tried a lot of models with their default parameters to understand whic
 and were worth to be improved. These were the first results: 
 
 \textcolor{red}{ADD THIS AS A FIGURE}
+
 \begin{table}[]
     \begin{tabular}{|l|c|c|}
     \hline
@@ -111,8 +113,36 @@ Among all the models, Support Vector Machines has the highest accuracy and F1 Sc
 The other models have lower performance, so for the next step, we will skip the Decision Tree Classifier and Naive Bayes. 
 We will still try to find ideal parameters for the MLP Classifier because the model ended up predicting the same label for each example. This is probably because the model was not trained properly, so we will give it a chance and try to improve it.
 
-\subsection{Support Vector Machines}
+\subsection{Hyperparameter Tuning \& Cross-Validation}
+Hyperparameter tuning is the process of finding the best values for the parameters that result in the best performance of the model on the given dataset.
+The purpose of cross-validation is to estimate how well a machine learning model will generalize to new data. By evaluating the model on multiple subsets of the data, it is less likely that the model's performance is biased towards a particular subset of the data. Cross-validation is commonly used in machine learning to evaluate the performance of different models or to compare the performance of different hyperparameters.
+To implement these methods and get the best model performance, we created a function that given a model, the parameters to test and the dataset, it will try the different combinations of parameters and return the best model and its performance. The function also performs cross-validation on the training data to evaluate the model's performance. The following code shows the function's implementation:
 
+\begin{lstlisting}[language=Python]
+def hyperparameters(model, params, X, y):
+    model = GridSearchCV(model, params, 
+    scoring="accuracy")
+    model.fit(X, y)
+    print("Best Parameters:")
+    print(model.bestparams)
+\end{lstlisting}
+
+These function is going to be applied in the models with different parameters to find the best model for each one.
+
+\subsection{Support Vector Machines}
+SVM was the model with the best performance with the default parameters. 
+We tried to improve the model by changing the parameters.
+
+\begin{table}[]
+    \begin{tabular}{|c|l|c|}
+    \hline
+    \textbf{Parameter} & \multicolumn{1}{c|}{\textbf{Values}}     & \multicolumn{1}{l|}{\textbf{Best Value}} \\ \hline
+    C                  & {[}0.001, 0.01, 0.1, 1, 10, 100, 1000{]} & 100                                      \\ \hline
+    kernel             & {[}linear, poly, rbf, sigmoid{]}         & rbf                                      \\ \hline
+    degree             & {[}2, 3, 4, 5{]}                         & 2                                        \\ \hline
+    gamma              & {[}scale, auto{]}                        & scale                                    \\ \hline
+    \end{tabular}
+\end{table}
 \section{Conclusion}
 
 \section{References}
