@@ -13,7 +13,7 @@
 \begin{document}
 
 \title{Identification of Digits from Sign Language Images
-Professor: \textcolor{red}{TODO: Add professor name}
+{\small Aprendizagem Automática -- Professor: Pétia Georgieva}
 }
 
 \author{\IEEEauthorblockN{José Santos, 98279}
@@ -94,9 +94,9 @@ The two evaluation metrics used to measure the performance of the models are Acc
 First, we tried a lot of models with their default parameters to understand which ones had value
 and were worth to be improved. These were the first results: 
 
-\textcolor{red}{ADD THIS AS A FIGURE}
-
-\begin{table}[]
+\begin{table}[!h]
+    \centering
+    \label{tab:models-default-parameters}
     \begin{tabular}{|l|c|c|}
     \hline
     \textbf{Model}                                                                                  & \textbf{Accuracy} & \textbf{F1 Score} \\ \hline
@@ -107,6 +107,7 @@ and were worth to be improved. These were the first results:
     Support Vector Machines                                                                         & 0.888             & 0.888             \\ \hline
     \begin{tabular}[c]{@{}l@{}}Neural Networks\\ (Multilayer Perceptron \\ Classifier)\end{tabular} & 0.092             & 0.015             \\ \hline
     \end{tabular}
+    \caption{Models' performance with default parameters}
 \end{table}
 
 Among all the models, Support Vector Machines has the highest accuracy and F1 Score, both of which are 0.888. Random Forest Classifier also shows a good performance with accuracy and F1 Score of 0.876. Logistic Regression comes in third place with accuracy and F1 Score of 0.750 and 0.749, respectively.
@@ -130,10 +131,11 @@ def hyperparameters(model, params, X, y):
 These function is going to be applied in the models with different parameters to find the best model for each one.
 
 \subsection{Support Vector Machines}
-SVM was the model with the best performance with the default parameters. 
-We tried to improve the model by changing the parameters.
+Support Vector Machines (SVM) proved to be the best-performing model for the classification task, with an initial accuracy and F1 Score of 88.8\% using default parameters. In an effort to improve the performance of the SVM model, we experimented with different values for the C, kernel, degree, and gamma parameters, as shown in Table~\ref{tab:svm_parameters}.
 
-\begin{table}[]
+\begin{table}[!h]
+    \centering
+    \label{tab:svm_parameters}
     \begin{tabular}{|c|l|c|}
     \hline
     \textbf{Parameter} & \multicolumn{1}{c|}{\textbf{Values}}     & \multicolumn{1}{l|}{\textbf{Best Value}} \\ \hline
@@ -142,7 +144,19 @@ We tried to improve the model by changing the parameters.
     degree             & {[}2, 3, 4, 5{]}                         & 2                                        \\ \hline
     gamma              & {[}scale, auto{]}                        & scale                                    \\ \hline
     \end{tabular}
+    \caption{SVM Parameters}
 \end{table}
+
+After running several iterations, we were able to identify the optimal parameter values, which resulted in a significant improvement in performance. The best-performing parameters were: 
+\textcolor{red}{ADD CONFUSION MATRIX, CLASSIFICATION REPORT \& COST LOSS OVER ITERATIONS}
+
+\begin{itemize}
+    \item \textbf{C} = 100
+    \item \textbf{kernel} = rbf
+    \item \textbf{degree} = 2
+    \item \textbf{gamma} = scale
+\end{itemize}
+The SVM model with these parameters achieved an accuracy and F1 Score of 95\%, which represents a significant improvement over the default parameters.
 \section{Conclusion}
 
 \section{References}
