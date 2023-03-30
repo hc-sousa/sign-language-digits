@@ -148,7 +148,6 @@ Support Vector Machines (SVM) proved to be the best-performing model for the cla
 \end{table}
 
 After running several iterations, we were able to identify the optimal parameter values, which resulted in a significant improvement in performance. The best-performing parameters were: 
-\textcolor{red}{ADD CONFUSION MATRIX, CLASSIFICATION REPORT \& COST LOSS OVER ITERATIONS}
 
 \begin{itemize}
     \item \textbf{C} = 100
@@ -157,6 +156,43 @@ After running several iterations, we were able to identify the optimal parameter
     \item \textbf{gamma} = scale
 \end{itemize}
 The SVM model with these parameters achieved an accuracy and F1 Score of 95\%, which represents a significant improvement over the default parameters.
+We can better visualize the performance of the SVM model by looking at the confusion matrix, as shown in Figure~\ref{fig:svm_confusion_matrix}.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{assets/svm-confusion-matrix.png}
+    \caption{SVM Confusion Matrix}
+    \label{fig:svm_confusion_matrix}
+\end{figure}
+
+As we can see in the confusion matrix, the SVM model can correctly classify most of the images. 
+Some classes are misclassified. This is probably because the images of these classes are very similar to each other, so it is not surprising that the model has a hard time classifying them correctly.
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|c|c|c|c|r|}
+        \hline
+        \textbf{Label} & \textbf{Precision} & \textbf{Recall} & F1 Score & \multicolumn{1}{c|}{\textbf{Occurrences}} \\ \hline
+        0              & 0.95               & 0.97            & 0.96     & 232                                       \\ \hline
+        1              & 0.97               & 0.96            & 0.97     & 259                                       \\ \hline
+        2              & 0.95               & 0.95            & 0.95     & 256                                       \\ \hline
+        3              & 0.98               & 0.97            & 0.97     & 254                                       \\ \hline
+        4              & 0.94               & 0.90            & 0.92     & 275                                       \\ \hline
+        5              & 0.97               & 0.98            & 0.98     & 238                                       \\ \hline
+        6              & 0.92               & 0.94            & 0.93     & 248                                       \\ \hline
+        7              & 0.91               & 0.93            & 0.92     & 237                                       \\ \hline
+        8              & 0.96               & 0.93            & 0.95     & 229                                       \\ \hline
+        9              & 0.94               & 0.98            & 0.96     & 247                                       \\ \hline
+    \end{tabular}
+    \label{tab:svm_classification_report}
+    \caption{SVM Classification Report}
+\end{table}
+Looking at the precision scores, which measure the proportion of true positives among all samples predicted as positive, we can see that the model performed well for most classes, with scores ranging from 0.91 to 0.98. This indicates that when the model predicted a certain class, it was usually correct.
+
+The recall scores, which measure the proportion of true positives among all actual positive samples, are also high for most classes, ranging from 0.90 to 0.98. This suggests that the model was able to identify most instances of each class correctly.
+
+In addition to high precision and recall scores, the F1-score, which balances these two metrics, also indicates strong performance for most classes, with scores ranging from 0.92 to 0.98. This suggests that the model achieved a good trade-off between precision and recall, and is able to correctly classify samples while minimizing false positives and false negatives.
+Overall, these results suggest that the classification model was effective at distinguishing between the different classes in the dataset, with high levels of precision, recall, and F1-score for most classes.
 \section{Conclusion}
 
 \section{References}
