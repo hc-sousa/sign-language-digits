@@ -267,6 +267,74 @@ In table \ref{tab:rfc_classification_report} we can check the precision, recall 
 \textcolor{red}{ADD COST LOSS OVER ITERATIONS FOR EVERY MODEL}
 
 \subsection{Multilayer Perceptron}
+This Neural Network approach was the model that delivered the worst results with the default parameters with a very bad accuracy and f1 socre of 0.092 and 0.015, respectively.
+The model got these values because it was not able to predict the labels correctly and kept predicting every image with the same label. This could be indicating that our model was not able to converge in order to understand how to diferentiate every label,
+so we didn't discard it in the initial phase and tried to get better results with it.
+This model is resource intensive so we were not able to test every possible combination of the parameters seen on table \ref{tab:mlp_parameters} below.
+
+\begin{table}[!h]
+    \centering
+    \label{tab:mlp_parameters}
+    \begin{tabular}{|c|l|c|}
+    \hline
+    \textbf{Parameter} & \multicolumn{1}{c|}{\textbf{Values}}     & \multicolumn{1}{l|}{\textbf{Best Value}} \\ \hline
+    solver       & {[}adam, lbfgs{]}                  & lbfgs                                      \\ \hline
+    max\_iter          & {[}250, 500, 1000{]}                      & 1000                                  \\ \hline
+    hidden\_layer\_sizes         & {[}(128,), (256,), (512,), (128, 128), (256, 256), (512, 512), (128, 256, 512), (128, 512, 256), (512, 256, 128){]}                    & (256, 512, 128)                                     \\ \hline
+    activation  & {[}relu, tanh{]}                           & relu                                   \\ \hline
+    alpha   & {[}0.0001, 0.001, 0.01{]}                            & 0.0001                               \\ \hline
+    learning\_rate       & {[}constant, invscaling, adaptive{]}                   & adaptive                                    \\ \hline
+    learning\_rate\_init    & {[}0.001, 0.01, 0.1{]}                   & 0.001                                    \\ \hline
+    \end{tabular}
+    \caption{Multilayer Perceptron Parameters}
+\end{table}
+
+So we tried manually without using the hyperparameters function we developed some combinations with the parameters seen below.
+The best results we got were with the parameters seen below:
+\begin{itemize}
+    \item \textbf{solver} = lbfgs
+    \item \textbf{max\_iter} = 1000
+    \item \textbf{hidden\_layer\_sizes} = (256, 512, 128)
+    \item \textbf{activation} = relu
+    \item \textbf{alpha} = 0.0001
+    \item \textbf{learning\_rate} = adaptive
+    \item \textbf{learning\_rate\_init} = 0.001
+\end{itemize}
+
+These parameters produced better results than the ones seen above, generating the confusion matrix in figure \ref{fig:mlp_confusion_matrix}.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{assets/mlp-confusion-matrix.png}
+    \caption{MLP Confusion Matrix}
+    \label{fig:mlp_confusion_matrix}
+\end{figure}
+
+As we can see, now the model is able to diferentiate the different labels, but still missclassified a lot of examples which resulted in a accuracy and f1 score of 77,3\%.
+Although, this was the best improvement comparing with the model with the default parameters it is still far from being the best performing model for these problem.
+The precision, recall and f1 score for each label can be observed below in table \ref{tab:mlp_classification_report}.
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|c|c|c|c|r|}
+        \hline
+        \textbf{Label} & \textbf{Precision} & \textbf{Recall} & \textbf{F1 Score} \\ \hline
+        0              & 0.82               & 0.84            & 0.83              \\ \hline
+        1              & 0.82               & 0.80            & 0.81              \\ \hline
+        2              & 0.70               & 0.69            & 0.69              \\ \hline
+        3              & 0.83               & 0.82            & 0.83              \\ \hline
+        4              & 0.69               & 0.66            & 0.68              \\ \hline
+        5              & 0.83               & 0.90            & 0.86              \\ \hline
+        6              & 0.68               & 0.71            & 0.69              \\ \hline
+        7              & 0.75               & 0.74            & 0.75              \\ \hline
+        8              & 0.76               & 0.77            & 0.77              \\ \hline
+        9              & 0.85               & 0.83            & 0.84              \\ \hline
+    \end{tabular}
+    \label{tab:mlp_classification_report}
+    \caption{Multilayer Perceptron Report}
+\end{table}
+
+
 
 \subsection{Logistic Regression}
 
