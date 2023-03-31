@@ -175,22 +175,21 @@ We can better visualize the performance of the SVM model by looking at the confu
 
 As we can see in the confusion matrix, the SVM model can correctly classify most of the images. 
 Some classes are misclassified. This is probably because the images of these classes are very similar to each other, so it is not surprising that the model has a hard time classifying them correctly.
-
 \begin{table}[!h]
     \centering
     \begin{tabular}{|c|c|c|c|r|}
         \hline
-        \textbf{Label} & \textbf{Precision} & \textbf{Recall} & F1 Score & \multicolumn{1}{c|}{\textbf{Occurrences}} \\ \hline
-        0              & 0.95               & 0.97            & 0.96     & 232                                       \\ \hline
-        1              & 0.97               & 0.96            & 0.97     & 259                                       \\ \hline
-        2              & 0.95               & 0.95            & 0.95     & 256                                       \\ \hline
-        3              & 0.98               & 0.97            & 0.97     & 254                                       \\ \hline
-        4              & 0.94               & 0.90            & 0.92     & 275                                       \\ \hline
-        5              & 0.97               & 0.98            & 0.98     & 238                                       \\ \hline
-        6              & 0.92               & 0.94            & 0.93     & 248                                       \\ \hline
-        7              & 0.91               & 0.93            & 0.92     & 237                                       \\ \hline
-        8              & 0.96               & 0.93            & 0.95     & 229                                       \\ \hline
-        9              & 0.94               & 0.98            & 0.96     & 247                                       \\ \hline
+        \textbf{Label} & \textbf{Precision} & \textbf{Recall} &  \textbf{F1 Score} \\ \hline
+        0              & 0.95               & 0.97            & 0.96               \\ \hline
+        1              & 0.97               & 0.96            & 0.97               \\ \hline
+        2              & 0.95               & 0.95            & 0.95               \\ \hline
+        3              & 0.98               & 0.97            & 0.97               \\ \hline
+        4              & 0.94               & 0.90            & 0.92               \\ \hline
+        5              & 0.97               & 0.98            & 0.98               \\ \hline
+        6              & 0.92               & 0.94            & 0.93               \\ \hline
+        7              & 0.91               & 0.93            & 0.92               \\ \hline
+        8              & 0.96               & 0.93            & 0.95               \\ \hline
+        9              & 0.94               & 0.98            & 0.96               \\ \hline
     \end{tabular}
     \label{tab:svm_classification_report}
     \caption{SVM Classification Report}
@@ -203,7 +202,6 @@ In addition to high precision and recall scores, the F1-score, which balances th
 Overall, these results suggest that the classification model was effective at distinguishing between the different classes in the dataset, with high levels of precision, recall, and F1-score for most classes.
 
 \subsection{Random Forest Classifier}
-Support Vector Machines (SVM) proved to be the best-performing model for the classification task, with an initial accuracy and F1 Score of 88.8\% using default parameters. In an effort to improve the performance of the SVM model, we experimented with different values for the C, kernel, degree, and gamma parameters, as shown in Table~\ref{tab:svm_parameters}.
 The Random Forest Classification model was the second best model with the default parameters and was very close to the SVM model, initially. 
 The accuracy and F1 Score were 88.8\%. 
 In an effort to improve the accuracy of this model. 
@@ -223,6 +221,58 @@ We experimented with different values for the model parameters, as shown in Tabl
     \end{tabular}
     \caption{Random Forest Classifier Parameters}
 \end{table}
+
+As we see in the table above, the best parameters for the Random Forest Classifier were:
+
+\begin{itemize}
+    \item \textbf{n\_estimators} = 500
+    \item \textbf{criterion} = entropy
+    \item \textbf{max\_depth} = None
+    \item \textbf{min\_samples\_split} = 2
+    \item \textbf{min\_samples\_leaf} = 1
+    \item \textbf{max\_features} = auto
+\end{itemize}
+
+The Random Forest Classifier model with these parameters achieved an accuracy and F1 Score of 89.1\%. The selection of ideal parameters only barely improved the model over the default parameters.
+By looking at the confusion matrix in figure \ref{fig:rf_confusion_matrix}, we can confirm that the model performed decently in classifying the images of sign language digits.
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{assets/rfc-confusion-matrix.png}
+    \caption{Random Forest Confusion Matrix}
+    \label{fig:rf_confusion_matrix}
+\end{figure}
+
+In table \ref{tab:rfc_classification_report} we can check the precision, recall and f1 score for each label in the dataset.
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|c|c|c|c|r|}
+        \hline
+        \textbf{Label} & \textbf{Precision} & \textbf{Recall} & \textbf{F1 Score} \\ \hline
+        0              & 0.86               & 0.95            & 0.91              \\ \hline
+        1              & 0.95               & 0.93            & 0.94              \\ \hline
+        2              & 0.89               & 0.86            & 0.87              \\ \hline
+        3              & 0.95               & 0.89            & 0.92              \\ \hline
+        4              & 0.89               & 0.80            & 0.85              \\ \hline
+        5              & 0.94               & 0.95            & 0.95              \\ \hline
+        6              & 0.82               & 0.89            & 0.85              \\ \hline
+        7              & 0.86               & 0.81            & 0.84              \\ \hline
+        8              & 0.86               & 0.90            & 0.88              \\ \hline
+        9              & 0.91               & 0.94            & 0.92              \\ \hline
+    \end{tabular}
+    \label{tab:rfc_classification_report}
+    \caption{Random Forest Classification Report}
+\end{table}
+
+\textcolor{red}{ADD COST LOSS OVER ITERATIONS FOR EVERY MODEL}
+
+\subsection{Multilayer Perceptron}
+
+\subsection{Logistic Regression}
+
+\section{Model comparison}
+
+\subsection{Image Augmentation Result}
 \section{Conclusion}
 
 \section{References}
