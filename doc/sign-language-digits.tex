@@ -201,6 +201,28 @@ The recall scores, which measure the proportion of true positives among all actu
 
 In addition to high precision and recall scores, the F1-score, which balances these two metrics, also indicates strong performance for most classes, with scores ranging from 0.92 to 0.98. This suggests that the model achieved a good trade-off between precision and recall, and is able to correctly classify samples while minimizing false positives and false negatives.
 Overall, these results suggest that the classification model was effective at distinguishing between the different classes in the dataset, with high levels of precision, recall, and F1-score for most classes.
+
+\subsection{Random Forest Classifier}
+Support Vector Machines (SVM) proved to be the best-performing model for the classification task, with an initial accuracy and F1 Score of 88.8\% using default parameters. In an effort to improve the performance of the SVM model, we experimented with different values for the C, kernel, degree, and gamma parameters, as shown in Table~\ref{tab:svm_parameters}.
+The Random Forest Classification model was the second best model with the default parameters and was very close to the SVM model, initially. 
+The accuracy and F1 Score were 88.8\%. 
+In an effort to improve the accuracy of this model. 
+We experimented with different values for the model parameters, as shown in Table~\ref{tab:rf_parameters}.
+\begin{table}[!h]
+    \centering
+    \label{tab:rf_parameters}
+    \begin{tabular}{|c|l|c|}
+    \hline
+    \textbf{Parameter} & \multicolumn{1}{c|}{\textbf{Values}}     & \multicolumn{1}{l|}{\textbf{Best Value}} \\ \hline
+    n\_estimators       & {[}50, 100, 200, 500{]}                  & 500                                      \\ \hline
+    criterion          & {[}gini, entropy{]}                      & entropy                                  \\ \hline
+    max\_depth          & {[}None, 5, 10, 20{]}                    & None                                     \\ \hline
+    min\_samples\_split  & {[}2, 5, 10{]}                           & 2                                   \\ \hline
+    min\_samples\_leaf   & {[}1, 2, 4{]}                            & 1                                 \\ \hline
+    max\_features       & {[}auto, sqrt, log2{]}                   & auto                                    \\ \hline
+    \end{tabular}
+    \caption{Random Forest Classifier Parameters}
+\end{table}
 \section{Conclusion}
 
 \section{References}
