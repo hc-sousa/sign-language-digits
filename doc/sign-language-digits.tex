@@ -335,13 +335,69 @@ The precision, recall and f1 score for each label can be observed below in table
 \end{table}
 
 \subsection{Logistic Regression}
+Logistic Regression with the default parameters got an accuracy and f1 score of 0.75 and 0.74, respectively.
+To improve the model we tried to change its parameters.
 
-\section{Model comparison}
+\begin{table}[!h]
+    \centering
+    \label{tab:lg_parameters}
+    \begin{tabular}{|c|l|c|}
+    \hline
+    \textbf{Parameter} & \multicolumn{1}{c|}{\textbf{Values}}     & \multicolumn{1}{l|}{\textbf{Best Value}} \\ \hline
+    solver       & {[}lbfgs{]}                  & lbfgs                                      \\ \hline
+    max\_iter          & {[}100, 400, 800{]}                      & 1000                                  \\ \hline
+    C        & {[}0.1, 1, 10, 100, 1000{]}                   & 10                                    \\ \hline
+    class\_weight  & {[}balanced{]}                           & balanced                                  \\ \hline
+    penalty   & {[}l2{]}                            & l2                               \\ \hline
+    \end{tabular}
+    \caption{Logistic Regression Parameters}
+\end{table}
+In this case the parameters were a little bit more limited, because has we have a multiclass problem and a small dataset 
+\textit{lbfgs} was the only viable option for the solver parameter, which limited our penalty parameter to \textit{l2} and the class\_weight parameter to \textit{balanced}.
+So we tried to vary the max\_iter and C parameters, and the set of parameter with the best results were:
+\begin{itemize}
+    \item \textbf{solver} = lbfgs
+    \item \textbf{max\_iter} = 1000
+    \item \textbf{C} = 10
+    \item \textbf{class\_weight} = balanced
+    \item \textbf{penalty} = l2
+\end{itemize}
+These parameters only got a small increase in performance, achieving an accuracy and f1 score of 0.78 and generating the confusion
+matrix in figure \ref{fig:lg-confusion-matrix}.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{assets/lg-confusion-matrix.png}
+    \caption{Logistic Regression Confusion Matrix}
+    \label{fig:lg-confusion-matrix}
+\end{figure}
+
+The precision, recall and f1 score for each label can be observed below in table \ref{tab:lg-classification-report}.
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|c|c|c|c|r|}
+        \hline
+        \textbf{Label} & \textbf{Precision} & \textbf{Recall} & \textbf{F1 Score} \\ \hline
+        0              & 0.85               & 0.85            & 0.85              \\ \hline
+        1              & 0.81               & 0.80            & 0.81              \\ \hline
+        2              & 0.74               & 0.69            & 0.71              \\ \hline
+        3              & 0.85               & 0.81            & 0.83              \\ \hline
+        4              & 0.71               & 0.70            & 0.71              \\ \hline
+        5              & 0.88               & 0.92            & 0.90              \\ \hline
+        6              & 0.70               & 0.76            & 0.73              \\ \hline
+        7              & 0.71               & 0.71            & 0.71              \\ \hline
+        8              & 0.74               & 0.75            & 0.74              \\ \hline
+        9              & 0.83               & 0.83            & 0.83              \\ \hline
+    \end{tabular}
+    \label{tab:lg-classification-report}
+    \caption{Logistic Regression Report}
+\end{table}
+
+\section{Model Comparison}
 
 \subsection{Image Augmentation Result}
 \section{Conclusion}
-
-\section{References}
 
 \begin{thebibliography}{00}
     \bibitem{b1} Akanksha Telagamsetty, Sign Language Digits Classification https://medium.com/analytics-vidhya/sign-language-classification-64fe8ad0fc2c
