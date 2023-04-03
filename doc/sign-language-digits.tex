@@ -267,7 +267,7 @@ In table \ref{tab:rfc_classification_report} we can check the precision, recall 
 \textcolor{red}{ADD COST LOSS OVER ITERATIONS FOR EVERY MODEL}
 
 \subsection{Multilayer Perceptron}
-This Neural Network approach was the model that delivered the worst results with the default parameters with a very bad accuracy and f1 socre of 0.092 and 0.015, respectively.
+This Neural Network approach was the model that delivered the worst results with the default parameters with a very bad accuracy and f1 score of 0.092 and 0.015, respectively.
 The model got these values because it was not able to predict the labels correctly and kept predicting every image with the same label. This could be indicating that our model was not able to converge in order to understand how to diferentiate every label,
 so we didn't discard it in the initial phase and tried to get better results with it.
 This model is resource intensive so we were not able to test every possible combination of the parameters seen on table \ref{tab:mlp_parameters} below.
@@ -280,7 +280,7 @@ This model is resource intensive so we were not able to test every possible comb
     \textbf{Parameter} & \multicolumn{1}{c|}{\textbf{Values}}     & \multicolumn{1}{l|}{\textbf{Best Value}} \\ \hline
     solver       & {[}adam, lbfgs{]}                  & lbfgs                                      \\ \hline
     max\_iter          & {[}250, 500, 1000{]}                      & 1000                                  \\ \hline
-    hidden\_layer\_sizes         & {[}(128,), (256,), (512,), (128, 128), (256, 256), (512, 512), (128, 256, 512), (128, 512, 256), (512, 256, 128){]}                    & (256, 512, 128)                                     \\ \hline
+    hidden\_layer\_sizes         & From 1 to 3 hidden layers                  & (256, 512, 128)                                     \\ \hline
     activation  & {[}relu, tanh{]}                           & relu                                   \\ \hline
     alpha   & {[}0.0001, 0.001, 0.01{]}                            & 0.0001                               \\ \hline
     learning\_rate       & {[}constant, invscaling, adaptive{]}                   & adaptive                                    \\ \hline
@@ -310,8 +310,8 @@ These parameters produced better results than the ones seen above, generating th
     \label{fig:mlp_confusion_matrix}
 \end{figure}
 
-As we can see, now the model is able to diferentiate the different labels, but still missclassified a lot of examples which resulted in a accuracy and f1 score of 77,3\%.
-Although, this was the best improvement comparing with the model with the default parameters it is still far from being the best performing model for these problem.
+As we can see, now the model can differentiate the different labels, but still misclassified a lot of examples which resulted in accuracy and f1 score of 77,3\%.
+Although, this was the best improvement compared with the model with the default parameters it is still far from being the best-performing model for this problem.
 The precision, recall and f1 score for each label can be observed below in table \ref{tab:mlp_classification_report}.
 
 \begin{table}[!h]
@@ -333,8 +333,6 @@ The precision, recall and f1 score for each label can be observed below in table
     \label{tab:mlp_classification_report}
     \caption{Multilayer Perceptron Report}
 \end{table}
-
-
 
 \subsection{Logistic Regression}
 
