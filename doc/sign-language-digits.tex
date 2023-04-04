@@ -45,11 +45,13 @@ In recent years, there has been growing interest in using machine learning to de
 
 In this paper, we present a novel approach to digit recognition from sign language images using machine learning. We explore several different models, including neural networks, support vector machines, and decision trees, and compare their performance on a dataset of sign language images. We also investigate the impact of some preprocessing techniques.
 
+
 \section{State of the art}
-Over the past few years, there have been several studies and projects focused on recognition from sign language images using machine learning techniques. Many of these approaches have utilized deep learning methods such as convolutional neural networks (CNNs), which have been shown to be effective in image recognition tasks.
+Over the past few years, there have been several studies and projects focused on recognition from sign language images using machine learning techniques. Many of these approaches\cite{b2}
+have utilized deep learning methods such as convolutional neural networks (CNNs), which have been shown to be effective in image recognition tasks\cite{b3}\cite{b4}.
 
 
-\textcolor{red}{TODO: Add some references to the state of the art}
+
 \section{Dataset Analysis}
 For the development of this work, we used a dataset provided by Kaggle that contains 2062 images of sign language digits. The dataset is well balanced, with a minimum of 204 examples for a label and a maximum of 208, ensuring that every label has a similar number of examples (Figure \ref{fig:dataset-balanced}). The dataset includes data for the digits 0 to 9, resulting in 10 labels in total as we can see on the figure \ref{fig:dataset-examples}. 
 
@@ -425,8 +427,12 @@ These results suggest that augmenting the dataset by generating variations of th
 
 Overall, our findings highlight the importance of data augmentation in machine learning, especially when dealing with limited or imbalanced datasets.
 
+
 \begin{thebibliography}{00}
     \bibitem{b1} Akanksha Telagamsetty, Sign Language Digits Classification https://medium.com/analytics-vidhya/sign-language-classification-64fe8ad0fc2c
+    \bibitem{b2} Shagun Katoch, Indian sign language recognition system using SURF with SVM and CNN https://doi.org/10.1016/j.array.2022.100141
+    \bibitem{b3} Mahin Damaneh, Statig hand gesture recognition in sign language based on convolutional neural network with feature extraction using ORB descriptor and Gabor filter https://doi.org/10.1016/j.eswa.2022.118559
+    \bibitem{b4} Karma wangchuk,Real-time Bhutanese Sign Language digits recognition system using convolution Neural Network https://doi.org/10.1016/j.icte.2020.08.002
 \end{thebibliography}
 
 \end{document}
