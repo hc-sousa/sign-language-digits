@@ -397,7 +397,38 @@ The precision, recall and f1 score for each label can be observed below in table
 \section{Model Comparison}
 
 \subsection{Image Augmentation Result}
+To understand if data augmentation was important for this problem we trained the models with the best set of parameters with the original training data
+and with the augmented data and tested them with the same training data to visualize the results. The results can be seen in figure \ref{fig:augmentation-comparison}.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{assets/originalvsaugmented.png}
+    \caption{Model Comparison with and without Data Augmentation}
+    \label{fig:augmentation-comparison}
+\end{figure}
+
+\subsection{Final Results}
+
+The vertical bar graph (figure \ref{fig:final-results}) represents the accuracy scores of four machine learning algorithms trained on an augmented dataset. The models included in the graph are Logistic Regression, Support Vector Machines, Multilayer Perceptron, and Random Forest. The height of each bar represents the accuracy achieved by the model on the augmented dataset. From the graph, we can observe that the Support Vector Machines model achieved the highest accuracy, with a score of 95.0\%, followed by Random Forest with 89.1\%. The other two models, Logistic Regression and Multilayer Perceptron, achieved lower accuracies of 78.0\% and 77.3\%, respectively. 
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{assets/augmented-results.png}
+    \caption{Final Results with Data Augmentation}
+    \label{fig:final-results}
+\end{figure}
+\section{Novelty and Contributions}
+
+
 \section{Conclusion}
+
+In this study, we compared the performance of four popular machine learning algorithms, namely Logistic Regression, Support Vector Machines, Multilayer Perceptron, and Random Forest, on an augmented dataset. The dataset was augmented using synthetic data generation techniques to increase its size and diversity.
+
+Our results show that the augmented dataset improved the accuracy of all four models compared to the original dataset. The Support Vector Machines model showed the highest accuracy, achieving an accuracy of 95.0\%, which is a 7.6\% increase from its original accuracy of 87.4\%. The Random Forest model also showed a significant improvement, achieving an accuracy of 89.1\%, which is a 16.6\% increase from its original accuracy of 76.5\%. The Logistic Regression and Multilayer Perceptron models also showed improvements in accuracy, but to a lesser extent.
+
+These results suggest that augmenting the dataset by generating variations of the original images can be a powerful technique for improving the performance of machine learning models. The improvements observed in this study could be attributed to the increased diversity and size of the augmented dataset, which allowed the models to learn more complex patterns and generalize better to new data.
+
+Overall, our findings highlight the importance of data augmentation in machine learning, especially when dealing with limited or imbalanced datasets.
 
 \begin{thebibliography}{00}
     \bibitem{b1} Akanksha Telagamsetty, Sign Language Digits Classification https://medium.com/analytics-vidhya/sign-language-classification-64fe8ad0fc2c
