@@ -104,7 +104,6 @@ and were worth to be improved. These were the first results:
 
 \begin{table}[!h]
     \centering
-    \label{tab:models-default-parameters}
     \begin{tabular}{|l|c|c|}
     \hline
     \textbf{Model}                                                                                  & \textbf{Accuracy} & \textbf{F1 Score} \\ \hline
@@ -115,7 +114,7 @@ and were worth to be improved. These were the first results:
     Support Vector Machines                                                                         & 0.888             & 0.888             \\ \hline
     \begin{tabular}[c]{@{}l@{}}Neural Networks\\ (Multilayer Perceptron \\ Classifier)\end{tabular} & 0.092             & 0.015             \\ \hline
     \end{tabular}
-    \caption{Models' performance with default parameters}
+    \caption{Models' performance with default parameters \label{tab:models-default-parameters}}
 \end{table}
 
 Among all the models, Support Vector Machines has the highest accuracy and F1 Score, both of which are 0.888. Random Forest Classifier also shows a good performance with accuracy and F1 Score of 0.876. Logistic Regression comes in third place with accuracy and F1 Score of 0.750 and 0.749, respectively.
@@ -143,7 +142,6 @@ Support Vector Machines (SVM) proved to be the best-performing model for the cla
 
 \begin{table}[!h]
     \centering
-    \label{tab:svm_parameters}
     \begin{tabular}{|c|l|c|}
     \hline
     \textbf{Parameter} & \multicolumn{1}{c|}{\textbf{Values}}     & \multicolumn{1}{l|}{\textbf{Best Value}} \\ \hline
@@ -152,7 +150,7 @@ Support Vector Machines (SVM) proved to be the best-performing model for the cla
     degree             & {[}2, 3, 4, 5{]}                         & 2                                        \\ \hline
     gamma              & {[}scale, auto{]}                        & scale                                    \\ \hline
     \end{tabular}
-    \caption{SVM Parameters}
+    \caption{SVM Parameters \label{tab:svm_parameters}}
 \end{table}
 
 After running several iterations, we were able to identify the optimal parameter values, which resulted in a significant improvement in performance. The best-performing parameters were: 
@@ -191,8 +189,7 @@ Some classes are misclassified. This is probably because the images of these cla
         8              & 0.96               & 0.93            & 0.95               \\ \hline
         9              & 0.94               & 0.98            & 0.96               \\ \hline
     \end{tabular}
-    \label{tab:svm_classification_report}
-    \caption{SVM Classification Report}
+    \caption{SVM Classification Report \label{tab:svm_classification_report}}
 \end{table}
 Looking at the precision scores, which measure the proportion of true positives among all samples predicted as positive, we can see that the model performed well for most classes, with scores ranging from 0.91 to 0.98. This indicates that when the model predicted a certain class, it was usually correct.
 
@@ -208,7 +205,6 @@ In an effort to improve the accuracy of this model.
 We experimented with different values for the model parameters, as shown in Table~\ref{tab:rf_parameters}.
 \begin{table}[!h]
     \centering
-    \label{tab:rf_parameters}
     \begin{tabular}{|c|l|c|}
     \hline
     \textbf{Parameter} & \multicolumn{1}{c|}{\textbf{Values}}     & \multicolumn{1}{l|}{\textbf{Best Value}} \\ \hline
@@ -219,7 +215,7 @@ We experimented with different values for the model parameters, as shown in Tabl
     min\_samples\_leaf   & {[}1, 2, 4{]}                            & 1                                 \\ \hline
     max\_features       & {[}auto, sqrt, log2{]}                   & auto                                    \\ \hline
     \end{tabular}
-    \caption{Random Forest Classifier Parameters}
+    \caption{Random Forest Classifier Parameters \label{tab:rf_parameters}}
 \end{table}
 
 As we see in the table above, the best parameters for the Random Forest Classifier were:
@@ -260,8 +256,7 @@ In table \ref{tab:rfc_classification_report} we can check the precision, recall 
         8              & 0.86               & 0.90            & 0.88              \\ \hline
         9              & 0.91               & 0.94            & 0.92              \\ \hline
     \end{tabular}
-    \label{tab:rfc_classification_report}
-    \caption{Random Forest Classification Report}
+    \caption{Random Forest Classification Report \label{tab:rfc_classification_report}}
 \end{table}
 
 \textcolor{red}{ADD COST LOSS OVER ITERATIONS FOR EVERY MODEL}
@@ -274,7 +269,7 @@ This model is resource intensive so we were not able to test every possible comb
 
 \begin{table}[!h]
     \centering
-    \label{tab:mlp_parameters}
+    
     \begin{tabular}{|c|l|c|}
     \hline
     \textbf{Parameter} & \multicolumn{1}{c|}{\textbf{Values}}     & \multicolumn{1}{l|}{\textbf{Best Value}} \\ \hline
@@ -286,7 +281,7 @@ This model is resource intensive so we were not able to test every possible comb
     learning\_rate       & {[}constant, invscaling, adaptive{]}                   & adaptive                                    \\ \hline
     learning\_rate\_init    & {[}0.001, 0.01, 0.1{]}                   & 0.001                                    \\ \hline
     \end{tabular}
-    \caption{Multilayer Perceptron Parameters}
+    \caption{Multilayer Perceptron Parameters \label{tab:mlp_parameters}}
 \end{table}
 
 So we tried manually without using the hyperparameters function we developed some combinations with the parameters seen below.
@@ -330,8 +325,8 @@ The precision, recall and f1 score for each label can be observed below in table
         8              & 0.76               & 0.77            & 0.77              \\ \hline
         9              & 0.85               & 0.83            & 0.84              \\ \hline
     \end{tabular}
-    \label{tab:mlp_classification_report}
-    \caption{Multilayer Perceptron Report}
+    
+    \caption{Multilayer Perceptron Report \label{tab:mlp_classification_report}}
 \end{table}
 
 \subsection{Logistic Regression}
@@ -340,7 +335,7 @@ To improve the model we tried to change its parameters.
 
 \begin{table}[!h]
     \centering
-    \label{tab:lg_parameters}
+    
     \begin{tabular}{|c|l|c|}
     \hline
     \textbf{Parameter} & \multicolumn{1}{c|}{\textbf{Values}}     & \multicolumn{1}{l|}{\textbf{Best Value}} \\ \hline
@@ -350,7 +345,7 @@ To improve the model we tried to change its parameters.
     class\_weight  & {[}balanced{]}                           & balanced                                  \\ \hline
     penalty   & {[}l2{]}                            & l2                               \\ \hline
     \end{tabular}
-    \caption{Logistic Regression Parameters}
+    \caption{Logistic Regression Parameters \label{tab:lg_parameters}}
 \end{table}
 In this case the parameters were a little bit more limited, because has we have a multiclass problem and a small dataset 
 \textit{lbfgs} was the only viable option for the solver parameter, which limited our penalty parameter to \textit{l2} and the class\_weight parameter to \textit{balanced}.
@@ -390,8 +385,8 @@ The precision, recall and f1 score for each label can be observed below in table
         8              & 0.74               & 0.75            & 0.74              \\ \hline
         9              & 0.83               & 0.83            & 0.83              \\ \hline
     \end{tabular}
-    \label{tab:lg-classification-report}
-    \caption{Logistic Regression Report}
+    
+    \caption{Logistic Regression Report \label{tab:lg-classification-report}}
 \end{table}
 
 \section{Model Comparison}
