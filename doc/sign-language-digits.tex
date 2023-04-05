@@ -7,6 +7,7 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{hyperref}
 \usepackage{listings}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
@@ -47,11 +48,13 @@ In this paper, we present a novel approach to digit recognition from sign langua
 
 
 \section{State of the art}
-Over the past few years, there have been several studies and projects focused on recognition from sign language images using machine learning techniques. Many of these approaches\cite{b2}
-have utilized deep learning methods such as convolutional neural networks (CNNs), which have been shown to be effective in image recognition tasks\cite{b3}\cite{b4}.
+In recent years, there has been a growing interest in using machine learning techniques for recognition from sign language images. Deep learning approaches such as convolutional neural networks (CNNs) have been particularly successful in this area. Several studies and projects have been conducted to differentiate sign language digits using machine learning techniques.
 
+One such study is the work by Derya Tanyildiz \cite{tanyildiz}, who used a processed dataset in the form of a .npy file to differentiate 0 and 1's using logistic regression. Similarly, Hasan Emre Bağriyanik \cite{bagriyanik} and Akanksha Telagamsetty \cite{telagamsetty} developed a logistic regression model with gradient descent optimization using forward and back propagation techniques for the same purpose.
 
+Another approach was taken by Ahmet Acar \cite{acar}, who used the Keras library to implement CNNs for differentiating sign language digits. Shivam Sourav Jha \cite{jha} also developed a system using Keras and TensorFlow, achieving an accuracy of 99.61\% in distinguishing two different sign language digits.
 
+In our approach, we aim to develop a system capable of differentiating all digits from sign language images. To achieve this goal, we will use the scikit-learn Python library.
 \section{Dataset Analysis}
 For the development of this work, we used a dataset provided by Kaggle that contains 2062 images of sign language digits. The dataset is well balanced, with a minimum of 204 examples for a label and a maximum of 208, ensuring that every label has a similar number of examples (Figure \ref{fig:dataset-balanced}). The dataset includes data for the digits 0 to 9, resulting in 10 labels in total as we can see on the figure \ref{fig:dataset-examples}. 
 
@@ -76,7 +79,7 @@ The images are provided in a \textit{.npy} format, but we found it easier to wor
 
 \subsection{Image Augmentation}
 The first thing we did to the images was to augment them to create more data for model training. 
-We used \textit{imgaug.augmenters} to perform the augmentation. 
+We used \textit{imgaug.augmenters} \cite{imgaug} to perform the augmentation. 
 The following changes were made to the images:
 \begin{itemize}
     \item \textit{\textbf{Rotate}} - Rotate the image by a random angle between -20 and 20 degrees.
@@ -415,8 +418,11 @@ The vertical bar graph (figure \ref{fig:final-results}) represents the accuracy 
     \label{fig:final-results}
 \end{figure}
 \section{Novelty and Contributions}
+While there were existing notebooks on Kaggle that developed a classification model to identify two different sign language digits, our approach aims to differentiate all ten digits from sign language images. Thus, it is difficult to directly compare our results with theirs. However, we can confirm that the preprocessing of the dataset images is a crucial step when developing a machine learning model, and data augmentation techniques can be useful in improving the model's performance, regardless of the approach used. Our experimentation revealed that Logistic Regression was one of the least accurate models we used, although it performed well in the notebooks that differentiated between only two digits.
 
+In addition to experimenting with different models and techniques, we also explored various methods for hyperparameter tuning. We studied Pavan Sanagapati's notebook on automated hyperparameter tuning \cite{hypertuning}, which presented implementations of different methods for hyper-tuned parameter finding. We ultimately decided to adapt the Grid Search implementation due to its reliability.
 
+We also found the work developed by aleju \cite{imgaug} to be very useful, as it presented a simple and easy-to-use library for image augmentation. We utilized this library to enhance our dataset by generating additional images with different variations, such as rotations, flips, and changes in brightness and contrast. These techniques were beneficial in improving the performance of our models.
 \section{Conclusion}
 
 In this study, we compared the performance of four popular machine learning algorithms, namely Logistic Regression, Support Vector Machines, Multilayer Perceptron, and Random Forest, on an augmented dataset. The dataset was augmented using synthetic data generation techniques to increase its size and diversity.
@@ -429,10 +435,13 @@ Overall, our findings highlight the importance of data augmentation in machine l
 
 
 \begin{thebibliography}{00}
-    \bibitem{b1} Akanksha Telagamsetty, Sign Language Digits Classification https://medium.com/analytics-vidhya/sign-language-classification-64fe8ad0fc2c
-    \bibitem{b2} Shagun Katoch, Indian sign language recognition system using SURF with SVM and CNN https://doi.org/10.1016/j.array.2022.100141
-    \bibitem{b3} Mahin Damaneh, Statig hand gesture recognition in sign language based on convolutional neural network with feature extraction using ORB descriptor and Gabor filter https://doi.org/10.1016/j.eswa.2022.118559
-    \bibitem{b4} Karma wangchuk,Real-time Bhutanese Sign Language digits recognition system using convolution Neural Network https://doi.org/10.1016/j.icte.2020.08.002
+    \bibitem{tanyildiz} Derya Tanyildiz. Sign language digit. URL: \url{https://www.kaggle.com/code/tanyildizderya/sign-language-digit}
+    \bibitem{bagriyanik} Hasan Emre Bağriyanik. Machine Learning Logistic Regression. URL: \url{https://www.kaggle.com/code/hasanemrebaryank/machine-learning-logistic-regression}
+    \bibitem{telagamsetty} Akanksha Telagamsetty, Sign Language Digits Classification. URL: \url{https://medium.com/analytics-vidhya/sign-language-classification-64fe8ad0fc2c}
+    \bibitem{acar} Ahmet Acar. Sign Digit. URL: \url{https://www.kaggle.com/code/acarahmet/sign-digit}
+    \bibitem{jha} Shivam Sourav Jha. Sign Language Digits Dataset with 99.61\% accuracy. URL: \url{https://www.kaggle.com/code/shivamsouravjha/sign-language-digits-dataset-with-99-61-accuracy}
+    \bibitem{imgaug} Alexander Jung. Imgaug library for image augmentation. URL: \url{https://imgaug.readthedocs.io/en/latest/}
+    \bibitem{hypertuning} Pavan Sanagapati. Automated Hyperparameter Tuning. URL: \url{https://www.kaggle.com/code/pavansanagapati/automated-hyperparameter-tuning}
 \end{thebibliography}
 
 \end{document}
