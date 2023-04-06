@@ -54,9 +54,9 @@ One such study is the work by Derya Tanyildiz \cite{tanyildiz}, who used a proce
 
 Another approach was taken by Ahmet Acar \cite{acar}, who used the Keras library to implement CNNs for differentiating sign language digits. Shivam Sourav Jha \cite{jha} also developed a system using Keras and TensorFlow, achieving an accuracy of 99.61\% in distinguishing two different sign language digits.
 
-In our approach, we aim to develop a system capable of differentiating all digits from sign language images. To achieve this goal, we will use the scikit-learn Python library.
+In our approach, we aim to develop a system capable of differentiating all digits from the sign language images dataset we will be using. To achieve this goal, we will use the scikit-learn Python library.
 \section{Dataset Analysis}
-For the development of this work, we used a dataset provided by Kaggle that contains 2062 images of sign language digits. The dataset is well balanced, with a minimum of 204 examples for a label and a maximum of 208, ensuring that every label has a similar number of examples (Figure \ref{fig:dataset-balanced}). The dataset includes data for the digits 0 to 9, resulting in 10 labels in total as we can see on the figure \ref{fig:dataset-examples}. 
+For the development of this work, we used a dataset provided by Kaggle that contains 2062 images of sign language digits. The dataset is well balanced, with a minimum of 204 examples for a label and a maximum of 208, ensuring that every label has a similar number of examples (Figure \ref{fig:dataset-balanced}). 
 
 \begin{figure}[h]
     \centering
@@ -65,6 +65,7 @@ For the development of this work, we used a dataset provided by Kaggle that cont
     \label{fig:dataset-balanced}
 \end{figure}
 
+The dataset includes data for the digits 0 to 9, resulting in 10 labels in total as we can see on the figure \ref{fig:dataset-examples}. 
 
 \begin{figure}[h]
     \centering
@@ -102,7 +103,7 @@ Resulting in 9897 total images for the training data and 2475 for the test data.
 \end{figure}
 \section{Models}
 In order to find the best training model, we tested several different models, including neural networks, support vector machines, and decision trees. We also tested different preprocessing techniques to see if they had any impact on the model's performance as discussed before.
-The two evaluation metrics used to measure the performance of the models are Accuracy and F1 Score. Accuracy is the proportion of correct predictions over the total number of predictions, while F1 Score considers both precision and recall of the model's predictions.
+The two evaluation metrics used to measure the performance of the models were accuracy and F1 Score. Accuracy is the proportion of correct predictions over the total number of predictions, while F1 Score considers both precision and recall of the model's predictions.
 
 First, we tried a lot of models with their default parameters to understand which ones had value
 and were worth to be improved. These were the first results: 
@@ -178,6 +179,8 @@ We can better visualize the performance of the SVM model by looking at the confu
 
 As we can see in the confusion matrix, the SVM model can correctly classify most of the images. 
 Some classes are misclassified. This is probably because the images of these classes are very similar to each other, so it is not surprising that the model has a hard time classifying them correctly.
+
+Looking at table \ref{tab:svm_classification_report} we can see the precision scores, which measure the proportion of true positives among all samples predicted as positive, we can see that the model performed well for most classes, with scores ranging from 0.91 to 0.98. This indicates that when the model predicted a certain class, it was usually correct.
 \begin{table}[!h]
     \centering
     \begin{tabular}{|c|c|c|c|r|}
@@ -196,16 +199,15 @@ Some classes are misclassified. This is probably because the images of these cla
     \end{tabular}
     \caption{SVM Classification Report \label{tab:svm_classification_report}}
 \end{table}
-Looking at the precision scores, which measure the proportion of true positives among all samples predicted as positive, we can see that the model performed well for most classes, with scores ranging from 0.91 to 0.98. This indicates that when the model predicted a certain class, it was usually correct.
 
 The recall scores, which measure the proportion of true positives among all actual positive samples, are also high for most classes, ranging from 0.90 to 0.98. This suggests that the model was able to identify most instances of each class correctly.
 
 In addition to high precision and recall scores, the F1-score, which balances these two metrics, also indicates strong performance for most classes, with scores ranging from 0.92 to 0.98. This suggests that the model achieved a good trade-off between precision and recall, and is able to correctly classify samples while minimizing false positives and false negatives.
-Overall, these results suggest that the classification model was effective at distinguishing between the different classes in the dataset, with high levels of precision, recall, and F1-score for most classes.
+Overall, these results suggest that the classification model was effective at distinguishing between the different classes in the dataset, with high levels of precision, recall, and F1-score for all classes.
 
 \subsection{Random Forest Classifier}
 The Random Forest Classification model was the second best model with the default parameters and was very close to the SVM model, initially. 
-The accuracy and F1 Score were 88.8\%. 
+The accuracy and F1 Score were 87.6\%. 
 In an effort to improve the accuracy of this model. 
 We experimented with different values for the model parameters, as shown in Table~\ref{tab:rf_parameters}.
 \begin{table}[!h]
@@ -234,7 +236,7 @@ As we see in the table above, the best parameters for the Random Forest Classifi
     \item \textbf{max\_features} = auto
 \end{itemize}
 
-The Random Forest Classifier model with these parameters achieved an accuracy and F1 Score of 89.1\%. The selection of ideal parameters only barely improved the model over the default parameters.
+ The Random Forest Classifier model with these parameters achieved an accuracy and F1 Score of 89.1\%. The selection of ideal parameters only barely improved the model over the default parameters.
 By looking at the confusion matrix in figure \ref{fig:rf_confusion_matrix}, we can confirm that the model performed decently in classifying the images of sign language digits.
 \begin{figure}[!h]
     \centering
@@ -338,7 +340,7 @@ The precision, recall and f1 score for each label can be observed below in table
 Logistic Regression with the default parameters got an accuracy and f1 score of 0.75 and 0.74, respectively.
 To improve the model we tried to change its parameters.
 
-\begin{table}[!h]
+\begin{table}[h]
     \centering
     
     \begin{tabular}{|c|l|c|}
@@ -354,7 +356,7 @@ To improve the model we tried to change its parameters.
 \end{table}
 In this case the parameters were a little bit more limited, because has we have a multiclass problem and a small dataset 
 \textit{lbfgs} was the only viable option for the solver parameter, which limited our penalty parameter to \textit{l2} and the class\_weight parameter to \textit{balanced}.
-So we tried to vary the max\_iter and C parameters, and the set of parameter with the best results were:
+So we tried to vary the max\_iter and C parameters, and the set of parameter with the best results was:
 \begin{itemize}
     \item \textbf{solver} = lbfgs
     \item \textbf{max\_iter} = 1000
@@ -365,7 +367,7 @@ So we tried to vary the max\_iter and C parameters, and the set of parameter wit
 These parameters only got a small increase in performance, achieving an accuracy and f1 score of 0.78 and generating the confusion
 matrix in figure \ref{fig:lg-confusion-matrix}.
 
-\begin{figure}[!h]
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{assets/lg-confusion-matrix.png}
     \caption{Logistic Regression Confusion Matrix}
@@ -425,7 +427,7 @@ In addition to experimenting with different models and techniques, we also explo
 We also found the work developed by aleju \cite{imgaug} to be very useful, as it presented a simple and easy-to-use library for image augmentation. We utilized this library to enhance our dataset by generating additional images with different variations, such as rotations, flips, and changes in brightness and contrast. These techniques were beneficial in improving the performance of our models.
 \section{Conclusion}
 
-In this study, we compared the performance of four popular machine learning algorithms, namely Logistic Regression, Support Vector Machines, Multilayer Perceptron, and Random Forest, on an augmented dataset. The dataset was augmented using synthetic data generation techniques to increase its size and diversity.
+In this study, we compared the performance of four popular machine learning algorithms, namely Logistic Regression, Support Vector Machines, Multilayer Perceptron, and Random Forest, on an augmented dataset. The dataset was augmented using data generation techniques to increase its size and diversity.
 
 Our results show that the augmented dataset improved the accuracy of all four models compared to the original dataset. The Support Vector Machines model showed the highest accuracy, achieving an accuracy of 95.0\%, which is a 7.6\% increase from its original accuracy of 87.4\%. The Random Forest model also showed a significant improvement, achieving an accuracy of 89.1\%, which is a 16.6\% increase from its original accuracy of 76.5\%. The Logistic Regression and Multilayer Perceptron models also showed improvements in accuracy, but to a lesser extent.
 
