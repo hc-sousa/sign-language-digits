@@ -121,6 +121,9 @@ Multilayer Perceptrion classifier|0.092|0.015
   - learning rate init = 0.001
 
 
+![bg right:50% 95%](../doc/assets/mlp-confusion-matrix.png)
+
+
 ---
 # Logistic Regression
 - 75% Accuracy and 74.9% F1 Score 
@@ -130,7 +133,7 @@ Multilayer Perceptrion classifier|0.092|0.015
   - C = 10
   - class weight = balanced
   - penalty = l2
-
+![bg right:50% 95%](../doc/assets/lg-confusion-matrix.png)
 
 
 
@@ -140,4 +143,9 @@ Multilayer Perceptrion classifier|0.092|0.015
 
 
 ![bg 90%](../doc/assets/augmented-results.png)
+
 ---
+# Conclusion
+- Support Vector Machine is the best performing model for this task
+- Most important aspect of these tests is the use of good data  
+
