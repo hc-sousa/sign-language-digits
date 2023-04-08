@@ -17,12 +17,20 @@ img { display: block;
 # Identification of Digits from sign languages 
 
 
+--- 
+# Introduction
+- Can be useful for:
+  - improving communication between hearing and non-hearing individuals; 
+  - Starting point for new technologies for the deaf and hard-of-hearing community.
+- Different models (neural networks, support vector machines, decision trees) were tested and their performance was compared on a sign language image dataset from Kaggle.
+- Studied impact of some preprocessing techniques.
+
 ---
 
-# Data 
-- Use of 2062 images as a database, provided by Kaggle 
-- Data includes all numbers from 0 to 9 with 10 labels 
-- Use of Raw image data due to easier manipulation
+# Data
+- Original dataset has 2062 images
+- Includes all numbers from 0 to 9 with 10 labels
+- Balanced dataset with similar number of examples for each label
 
 ![bg right:50% 80%](../doc/assets/sign-language-digits.png)
 
@@ -31,65 +39,75 @@ img { display: block;
 
 ---
 # Data Preprocessing
+## Image Augmentation
 
-- Changes preformed randomly:
-  - rotate(-20º to 20º)
-  - Gausian noise (0 to 0.05*255)
-  - Gamma contrast(0.5 to 1.5)
-
-With this changes for every image five new ones were made
-
----
-
-
-
-
-
-# Image processing
-- Use of images that were grayscale and flattened showed better results
-- Split the dataset into training and testing 
-![bg right:40% 95%]
-
-
+- We created 5 variations of each image by randomnly:
+  - Rotating from -20 to 20 degrees
+  - Adding Gaussian noise
+  - Changing the gamma contrast by a random factor
+![](assets/image-augmentation.png)
 
 ---
-# Models 
-**model** | **Accuracy** | **F1 score**
-:--|:--:|:--:|
-Logistic regression |0.750 | 0.749
-Decision Three Classifier | 0.631 |0.632
-Random Forest Classifier |0.876|0.876
-Naive Bayes |0.502|0.506
-Support Vector Machines|0.888|0.888
-Multilayer Perceptrion classifier|0.092|0.015
+# Data Preprocessing
+## Image processing
+- Resize image to 50x50
+- Convert it to grayscale
+- Flatten the images
+
+## Training and Testing data
+- Training data: 80% of the original dataset
+- Testing data: 20% of the augmented dataset
+![bg right:50% 80%](../doc/assets/meta-chart.png)
 
 
-
-
-
-
-
-
+---
+# Models
+Initial run with default parameters: 
+| **Model**                        | **Accuracy** | **F1 score** |
+|---------------------------------|:------------:|:------------:|
+| Multilayer Perceptron Classifier|    0.092     |    0.015     |
+| Naive Bayes                     |    0.502     |    0.506     |
+| Decision Tree Classifier        |    0.631     |    0.632     |
+| Logistic Regression             |    0.750     |    0.749     |
+| Random Forest Classifier        |    0.876     |    0.876     |
+| Support Vector Machines         |    0.888     |    0.888     |
 
 --- 
 
 
-# hyperparameter tuning & cross-validation
-
+# Hyperparameter Tuning & Cross-Validation
+We tried to find the optimal parameters for our case for the following Machine Learning models:
+- Support Vector Machines
+- Random Forest Classifier
+- Logistic Regression
+- Multilayer Perceptron Classifier
 
 ---
-# Support Vector machine
-
-- Best performing model for the classification task.
-- 88% Accuracy and F1 Score
+# Multilayer Perceptron
+- 9.2% Accuracy and 1.5% F1 Score
 - Best performing parameters
-  - C=100
-  - kernel=rbf
-  - degree=2
-  - gamma=scale
+  - solver = lbfgs
+  - max iter = 1000
+  - hidden layer sizes = (256, 512, 128)
+  - activation = relu
+  - alpha = 0.0001
+  - learning rate = adaptive
+  - learning rate init = 0.001
 
-![bg right:50% 95%](../doc/assets/svm-confusion-matrix.png)
 
+![bg right:50% 95%](../doc/assets/mlp-confusion-matrix.png)
+
+---
+
+# Logistic Regression
+- 75% Accuracy and 74.9% F1 Score 
+- Best performing parameters
+  - solver 
+  - max iter = 1000
+  - C = 10
+  - class weight = balanced
+  - penalty = l2
+![bg right:50% 95%](../doc/assets/lg-confusion-matrix.png)
 
 ---
 
@@ -107,37 +125,21 @@ Multilayer Perceptrion classifier|0.092|0.015
 ![bg right:50% 95%](../doc/assets/rfc-confusion-matrix.png)
 
 
----
-# Multilayer Perceptron
-- Worst results of all tests
-- 9.2% Accuracy and 1.5% F1 Score
-- Best performing parameters
-  - solver=lbfgs
-  - max iter = 1000
-  - hidden layer sizes = (256, 512, 128)
-  - activation = relu
-  - alpha = 0.0001
-  - learning rate = adaptive
-  - learning rate init = 0.001
-
-
-![bg right:50% 95%](../doc/assets/mlp-confusion-matrix.png)
-
-
----
-# Logistic Regression
-- 75% Accuracy and 74.9% F1 Score 
-- Best performing parameters
-  - solver 
-  - max iter = 1000
-  - C = 10
-  - class weight = balanced
-  - penalty = l2
-![bg right:50% 95%](../doc/assets/lg-confusion-matrix.png)
-
-
-
 --- 
+# Support Vector machine
+
+- Best performing model for the classification task.
+- 88% Accuracy and F1 Score
+- Best performing parameters
+  - C=100
+  - kernel=rbf
+  - degree=2
+  - gamma=scale
+
+![bg right:50% 95%](../doc/assets/svm-confusion-matrix.png)
+
+
+---
 
 ![bg  90%](../doc/assets/originalvsaugmented.png) 
 
