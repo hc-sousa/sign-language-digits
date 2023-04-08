@@ -5,31 +5,41 @@ theme: gaia
         - lead
 
 
-paginate: true
 backgroundColor: #fff
 marp: true
 
 img { display: block;
   margin-top: 10em;}
 
+paginate: true
 ---
+<!-- _class: center, middle _ -->
 
 # Identification of Digits from sign languages 
 
+##
+
+<img src="../doc/assets/sign-language-digits.png" style="width: 60%; margin-left:20%">
+
+## 
+##
+
+José Santos, 98279
+Henrique Sousa, 98324
 
 --- 
 # Introduction
 - Can be useful for:
-  - improving communication between hearing and non-hearing individuals; 
-  - Starting point for new technologies for the deaf and hard-of-hearing community.
-- Different models (neural networks, support vector machines, decision trees) were tested and their performance was compared on a sign language image dataset from Kaggle.
+  - Improving communication between hearing and non-hearing individuals; 
+  - New technologies for the deaf and hard-of-hearing community.
+- Different models were trained with a  dataset from Kaggle and their performance was compared.
 - Studied impact of some preprocessing techniques.
 
 ---
 
 # Data
 - Original dataset has 2062 images
-- Includes all numbers from 0 to 9 with 10 labels
+- Includes all numbers from 0 to 9
 - Balanced dataset with similar number of examples for each label
 
 ![bg right:50% 80%](../doc/assets/sign-language-digits.png)
@@ -55,22 +65,59 @@ img { display: block;
 - Flatten the images
 
 ## Training and Testing data
-- Training data: 80% of the original dataset
+- Training data: 80% of the augmented dataset
 - Testing data: 20% of the augmented dataset
 ![bg right:50% 80%](../doc/assets/meta-chart.png)
 
 
 ---
 # Models
-Initial run with default parameters: 
-| **Model**                        | **Accuracy** | **F1 score** |
-|---------------------------------|:------------:|:------------:|
-| Multilayer Perceptron Classifier|    0.092     |    0.015     |
-| Naive Bayes                     |    0.502     |    0.506     |
-| Decision Tree Classifier        |    0.631     |    0.632     |
-| Logistic Regression             |    0.750     |    0.749     |
-| Random Forest Classifier        |    0.876     |    0.876     |
-| Support Vector Machines         |    0.888     |    0.888     |
+- Initial run with default parameters: 
+
+<div style="text-align:center;; margin-left:20%">
+  <table>
+    <thead>
+      <tr>
+        <th>Model</th>
+        <th>Accuracy</th>
+        <th>F1 score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Multilayer Perceptron Classifier</td>
+        <td>0.092</td>
+        <td>0.015</td>
+      </tr>
+      <tr>
+        <td>Naive Bayes</td>
+        <td>0.502</td>
+        <td>0.506</td>
+      </tr>
+      <tr>
+        <td>Decision Tree Classifier</td>
+        <td>0.631</td>
+        <td>0.632</td>
+      </tr>
+      <tr>
+        <td>Logistic Regression</td>
+        <td>0.750</td>
+        <td>0.749</td>
+      </tr>
+      <tr>
+        <td>Random Forest Classifier</td>
+        <td>0.876</td>
+        <td>0.876</td>
+      </tr>
+      <tr>
+        <td>Support Vector Machines</td>
+        <td>0.888</td>
+        <td>0.888</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
 --- 
 
@@ -84,70 +131,121 @@ We tried to find the optimal parameters for our case for the following Machine L
 
 ---
 # Multilayer Perceptron
-- 9.2% Accuracy and 1.5% F1 Score
-- Best performing parameters
-  - solver = lbfgs
-  - max iter = 1000
-  - hidden layer sizes = (256, 512, 128)
-  - activation = relu
-  - alpha = 0.0001
-  - learning rate = adaptive
-  - learning rate init = 0.001
+- Initial Accuracy of 9.2% and F1 Score of 1.5%
 
+<img src="assets/mlp-table.png" style="width: 60%; margin-left:20%">
 
-![bg right:50% 95%](../doc/assets/mlp-confusion-matrix.png)
+---
+# Multilayer Perceptron
+- Final Accuracy and F1 Score of 0,77
+- Increase of ~739.13%
+
+<div style="display:flex; align-items: center;">
+     <div style="flex:1;">
+          <img src="assets/mlp-report.png" width="80%"/>
+     </div>
+     <div style="flex:1; align-items: center;">
+          <img src="../doc/assets/mlp-confusion-matrix.png" width="100%">
+     </div>
+</div>
 
 ---
 
 # Logistic Regression
-- 75% Accuracy and 74.9% F1 Score 
-- Best performing parameters
-  - solver 
-  - max iter = 1000
-  - C = 10
-  - class weight = balanced
-  - penalty = l2
-![bg right:50% 95%](../doc/assets/lg-confusion-matrix.png)
+- Initial Accuracy and F1 Score of 75%
+
+<img src="assets/lg-table.png" style="width: 60%; margin-left:20%">
+
+---
+
+# Logistic Regression
+- Final Accuracy and F1 Score of 0,78
+- Increase of ~4%
+
+<div style="display:flex; align-items: center;">
+     <div style="flex:1;">
+          <img src="assets/lg-report.png" width="80%"/>
+     </div>
+     <div style="flex:1; align-items: center;">
+          <img src="../doc/assets/lg-confusion-matrix.png" width="100%">
+     </div>
+</div>
 
 ---
 
 # Random Forest Classifier
-- Second best model
-- 88% Accuracy and F1 Score
-- Best performing parameters
-  - n_estimators=500
-  - criterion=entropy
-  - max_depth=None
-  - min_samples_split=2
-  - min_samples_leaf=1
-  - max_features=auto
+- Initial Accuracy and F1 Score of 87,6%
 
-![bg right:50% 95%](../doc/assets/rfc-confusion-matrix.png)
+<img src="assets/rf-table.png" style="width: 60%; margin-left:20%">
 
+---
+
+# Random Forest Classifier
+- Final Accuracy and F1 Score of 0.89
+- Increase of ~1,7%
+
+<div style="display:flex; align-items: center;">
+     <div style="flex:1;">
+          <img src="assets/rf-report.png" width="80%"/>
+     </div>
+     <div style="flex:1; align-items: center;">
+          <img src="../doc/assets/rfc-confusion-matrix.png" width="100%">
+     </div>
+</div>
 
 --- 
-# Support Vector machine
+# Support Vector Machines
+- Initial Accuracy and F1 Score of 88,8%
 
-- Best performing model for the classification task.
-- 88% Accuracy and F1 Score
-- Best performing parameters
-  - C=100
-  - kernel=rbf
-  - degree=2
-  - gamma=scale
-
-![bg right:50% 95%](../doc/assets/svm-confusion-matrix.png)
-
+<img src="assets/svm-table.png" style="width: 60%; margin-left:20%">
 
 ---
 
-![bg  90%](../doc/assets/originalvsaugmented.png) 
+# Support Vector Machines
+- Final Accuracy and F1 Score of 0.95
+- Increase of ~6,7%
 
+<div style="display:flex; align-items: center;">
+     <div style="flex:1;">
+          <img src="assets/svm-report.png" width="80%"/>
+     </div>
+     <div style="flex:1; align-items: center;">
+          <img src="../doc/assets/svm-confusion-matrix.png" width="100%">
+     </div>
+</div>
 
-![bg 90%](../doc/assets/augmented-results.png)
+--- 
+# Model Comparison
+- Support Vector Machines achieved highest accuracy with 95.0%
+- Random Forest followed with 89.1%
+- Logistic Regression achieved 78.0%
+- Multilayer Perceptron achieved 77.3%
+
+![bg right:50% 80%](../doc/assets/augmented-results.png)
 
 ---
+
+# Original vs Augmented Dataset
+- In the graph below we can see the difference in performance by using the original dataset and the augmented one
+
+<img src="../doc/assets/originalvsaugmented.png" style="width: 60%; margin-left:20%">
+
+---
+# Novelty and Contribution
+- We focused on identifying all 10 digits while most notebooks we found only focused on two digits
+  - Made it difficult to compare performances
+- Pavan's notebook on automated hyperparameter tuning helped us decide the better way to find the optimal parameters
+- Aleju's imgaug presented a simple and easy-to-use python library for generating additional images
+
+---
+
 # Conclusion
-- Support Vector Machine is the best performing model for this task
+- Support Vector Machine was the best performing model for this task
+- We were able to achieve a good performance with our changes
 - Most important aspect of these tests is the use of good data  
+- Image augmentation is extremely important for these kind of problems when dealing with small datasets
+ 
+---
+
+# Questions?
 
