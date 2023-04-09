@@ -1,0 +1,8 @@
+numpy
+opencv-python
+keras
+tensorflow
+scikit-learn 
+scipy 
+matplotlib
+imgaug
